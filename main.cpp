@@ -4,6 +4,32 @@
 #include <algorithm>
 #include <numeric>
 
+class Movie{
+public:
+    typedef enum {
+        MovieType_Film,
+        MovieType_Tv
+    }MovieType;
+
+    Movie(std::string name, int year,MovieType type)
+    :name(name),year(year),type(type){
+    }
+    std::string getName() const{
+        return name;
+    }
+    int getYear() const{
+        return year;
+    }
+    MovieType getMovieType() const{
+        return type;
+    }
+private:
+    std::string name;
+    MovieType type;
+    int year;
+};
+
+
 
 
 
@@ -236,6 +262,36 @@ private:
 
 
 int main(){ 
+
+ std::vector<Movie> greatMovies{
+        Movie("The Mummy returns",2001,Movie::MovieType::MovieType_Film),
+        Movie("Fast and Furious 7",2014,Movie::MovieType::MovieType_Film),
+        Movie("Fast & Furious Presents: Hobbs & Shaw",2019,Movie::MovieType::MovieType_Film),
+        Movie("Star Trek: Voyager",2000,Movie::MovieType::MovieType_Tv),
+        Movie("Young Rock",2021,Movie::MovieType::MovieType_Tv),
+    };
+
+    // Finns det nån movie skapad 2000
+     bool found = std::any_of(std::begin(greatMovies),std::end(greatMovies),[](Movie const &movie){
+        return movie.getYear()  == 2000;
+    });
+
+    int count2 = std::count_if(std::begin(greatMovies),std::end(greatMovies),[](Movie const &movie){
+        return movie.getYear()  == 2000;
+    });
+
+
+    int count = 0;
+    for(int i = 0; i < greatMovies.size();i++){
+        if(greatMovies.at(i).getYear() == 2000){
+            count++;
+            break;
+        }
+    }
+    if(count > 0){
+        std::cout << "Ja den finnsa" << std::endl;
+    }
+
     
     MyArray<int,12> allMonths;
     allMonths.add(1);
