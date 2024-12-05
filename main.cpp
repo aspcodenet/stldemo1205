@@ -6,6 +6,8 @@
 
 
 
+
+
 // DEFINE = preprocessorn - FATTAR INTE C/C++ ren TEXT
 
 
@@ -74,12 +76,12 @@
 
 
 
-// class Player{
-// public:    
-//     std::string Name;
-//     int Age;
+class Player{
+public:    
+    std::string Name;
+    int Age;
 
-// };
+};
 
 
 
@@ -141,7 +143,41 @@
 // }
 
 
-int findBiggest(int i, int j, int k){
+// int findBiggest(int i, int j, int k){
+//     if(i > j && i > k){
+//         return i;
+//     }
+//     if(j > i && j > k){
+//         return j;
+//     }
+//     return k;
+// }
+
+// float findBiggest(float i, float j, float k){
+//     if(i > j && i > k){
+//         return i;
+//     }
+//     if(j > i && j > k){
+//         return j;
+//     }
+//     return k;
+// }
+
+
+// std::string findBiggest(std::string i, std::string j, std::string k){
+//     if(i > j && i > k){
+//         return i;
+//     }
+//     if(j > i && j > k){
+//         return j;
+//     }
+//     return k;
+// }
+
+
+
+template <typename T>
+T findBiggest(T i, T j, T k){
     if(i > j && i > k){
         return i;
     }
@@ -152,8 +188,80 @@ int findBiggest(int i, int j, int k){
 }
 
 
+template <typename T>
+void swap(T &i, T &j) {
+    T temp = i;
+    i = j;
+    j  = temp;  
+}
 
-int main(){    
+
+template<typename T,int N>
+class MyArray{
+public: 
+    MyArray(){
+        antal = 0;
+    }
+    void add(T one){
+        // om antalet > max 
+        // return "ERROR - finns inte plats för mer"
+        // 
+        things[antal] = one;
+        antal++;
+    }
+
+    // void removeAt(int index){
+    //     // foppa    kalle   stefan   lisa   anna   
+    //     //  0        1          2       3    4         antal = 5
+    //     // foppa    stefan     lisa    anna            antal = 4
+    //  }
+
+
+
+
+    int size(){
+        return antal;
+    }
+    T getAt(int index){
+        return things[index];
+    }
+
+
+private:
+    int antal;
+    T things[N]; // KAN INTE VÄXA/KRYMPA .- statisk i storlek  , INTE static
+};
+
+
+
+
+int main(){ 
+    
+    MyArray<int,12> allMonths;
+    allMonths.add(1);
+    allMonths.add(2);
+    
+    for(int i =0; i < allMonths.size();i++){
+        std::cout << allMonths.getAt(i) << std::endl;
+    }
+
+    int i=12;
+    int j = 13;
+
+
+
+    int biggest = findBiggest<int>(12,99,11);
+    float bfloat = findBiggest<float>(12.99f,99.0f,110.0f);
+    std::string latest = findBiggest<std::string>("Stefan", "Anna","Östen");
+
+    //int biggest2 = findBiggest(12,99,11);
+
+
+   std::vector<int> nummer;
+   std::vector<std::string> namn;
+   std::vector<Player> player;
+
+
     std::cout << "Hej" << std::endl;
 }
     // int s = test(23,18); 
